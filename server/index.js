@@ -5,6 +5,7 @@ const cors = require("cors");
 const port = 3000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({ info: "Node.js, Express, and Postgres API" });
@@ -15,6 +16,7 @@ app.get("/cars/:id", db.getCarById);
 app.post("/cars", db.createCar);
 app.put("/cars/:id", db.updateCar);
 app.delete("/cars/:id", db.deleteCar);
+app.delete("/cars", db.dropTable);
 
 app.listen(port, () => {
   console.log(`APP listening on port ${port}.`);

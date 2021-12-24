@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Table :carData="carData" />
-    <Form />
+    <Form v-on:getData="getData" />
   </div>
 </template>
 
@@ -17,12 +17,15 @@ export default {
   },
   data() {
     return {
-      carData: "",
+      carData: this.getData(),
     };
   },
   methods: {
-    getData() {
-      console.log(this.carData[0]);
+    async getData() {
+      console.log("testing");
+      return await fetch("http://localhost:3000/cars/")
+        .then((response) => response.json())
+        .then((data) => (this.carData = data));
     },
   },
 

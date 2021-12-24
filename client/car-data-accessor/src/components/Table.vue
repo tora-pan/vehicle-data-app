@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Table",
   data() {
@@ -36,8 +35,29 @@ export default {
   },
   methods: {
     getAllCars() {},
+    
   },
 };
 </script>
 
-<style></style>
+<style>
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  background-color: gray;
+}
+td {
+  background-color: lightgoldenrodyellow;
+}
+</style>

@@ -31,7 +31,8 @@ const getCarById = (req, res) => {
 
 // post a new car
 const createCar = (req, res) => {
-  const { make, model, year, color } = request.body;
+  console.log(req.body);
+  const { make, model, year, color } = req.body;
 
   pool.query(
     "INSERT INTO cars (make, model, year, color) VALUES ($1, $2, $3, $4)",
@@ -40,7 +41,7 @@ const createCar = (req, res) => {
       if (error) {
         throw error;
       }
-      res.status(200).send(`Car added with ID: ${result.insertID}`);
+      res.status(200).send(`Car added with ID: ${results.insertID}`);
     }
   );
 };
@@ -74,10 +75,20 @@ const deleteCar = (req, res) => {
   });
 };
 
+const dropTable = (req, res) => {
+  pool.query("TRUNCATE cars; DELETE FROM cars", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).send("Table Dropped!");
+  });
+};
+
 module.exports = {
   getCars,
   getCarById,
   createCar,
   updateCar,
   deleteCar,
+  dropTable,
 };
